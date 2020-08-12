@@ -1,0 +1,35 @@
+{
+    "name": "rarangels/api-basica",
+    "authors": [
+        {
+            "name": "Rafael Agustin Rangel Sandoval",
+            "email": "rarangels@unal.edu.co"
+        }
+    ],
+    "description": "Api basica.",
+    "keywords": [
+        "rarangels",
+        "api",
+        "basica"
+    ],
+    "license": "MIT",
+    "minimum-stability": "stable",
+    "require": {
+        "php" : "^7.2.5",
+        "laravel/framework": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rarangels\\api-basica\\": "src"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+            ]
+        }
+    }
+}
