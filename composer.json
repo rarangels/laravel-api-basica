@@ -3,14 +3,15 @@
     "authors": [
         {
             "name": "Rafael Agustin Rangel Sandoval",
-            "email": "rarangels@unal.edu.co"
+            "email": "rarangels93@gmail.com"
         }
     ],
     "description": "Api basica.",
     "keywords": [
         "rarangels",
         "api",
-        "basica"
+        "basica",
+        "laravel"
     ],
     "license": "MIT",
     "minimum-stability": "stable",
