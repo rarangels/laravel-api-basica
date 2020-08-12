@@ -21,7 +21,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Rarangels\\api-basica\\": "src"
+            "Rarangels\\ApiBasica\\": "src"
         },
         "files": [
             "src/helpers.php"

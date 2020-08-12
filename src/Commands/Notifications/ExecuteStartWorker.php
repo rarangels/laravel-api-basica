@@ -7,7 +7,7 @@
  * Author: Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
  */
 
-namespace rarangels\Commands\Notifications;
+namespace Rarangels\ApiBasica\Commands\Notifications;
 
 /**
  * Class ExecuteStartWorker

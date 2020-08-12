@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use rarangels\Commands\Notifications\ExecuteStartWorker;
+use  Rarangels\ApiBasica\Commands\Notifications\ExecuteStartWorker;
 
 /**
  * Class StartWorker
