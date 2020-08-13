@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace Rarangels\ApiBasica\Commands\Notifications;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use  Rarangels\ApiBasica\Commands\Notifications\ExecuteStartWorker;
 
 /**
  * Class StartWorker

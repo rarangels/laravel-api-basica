@@ -24,8 +24,17 @@ class ApiBasicaServiceProvider extends ServiceProvider
     public function boot(){
         if ($this->app->runningInConsole()) {
             $this->commands([
-                Commands\Notifications\ExecuteStartWorker::class,
+                Commands\Notifications\WorkerStart::class,
             ]);
         }
+    }
+    /**
+     * Register the application services.
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
     }
 }
