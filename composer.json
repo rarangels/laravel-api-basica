@@ -17,7 +17,8 @@
     "minimum-stability": "stable",
     "require": {
         "php" : "^7.2.5",
-        "laravel/framework": "^7.0"
+        "illuminate/container": "^7.25",
+        "illuminate/contracts": "^7.25"
     },
     "autoload": {
         "psr-4": {

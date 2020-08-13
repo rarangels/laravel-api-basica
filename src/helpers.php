@@ -1,10 +1,55 @@
 <?php
 
+use Illuminate\Container\Container;
+use Illuminate\Contracts\Routing\ResponseFactory;
+
+if (! function_exists('response')) {
+    /**
+     * Return a new response from the application.
+     *
+     * @param string $content
+     * @param int $status
+     * @param array $headers
+     * @return \Illuminate\Contracts\Foundation\Application|mixed
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    function response($content = '', $status = 200, array $headers = [])
+    {
+        $factory = app(ResponseFactory::class);
+
+        if (func_num_args() === 0) {
+            return $factory;
+        }
+
+        return $factory->make($content, $status, $headers);
+    }
+}
+
+if (! function_exists('app')) {
+    /**
+     * Get the available container instance.
+     *
+     * @param null $abstract
+     * @param array $parameters
+     * @return \Illuminate\Container\Container|mixed|object
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    function app($abstract = null, array $parameters = [])
+    {
+        if (is_null($abstract)) {
+            return Container::getInstance();
+        }
+
+        return Container::getInstance()->make($abstract, $parameters);
+    }
+}
+
 if (! function_exists('responseSuccess')) {
     /**
      * @param null $message
      * @param null $data
-     * @return mixed|string
+     * @return
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
     function responseSuccess($message = null, $data = null)
@@ -21,7 +66,8 @@ if (! function_exists('responseError')) {
     /**
      * @param null $message
      * @param null $data
-     * @return mixed|string
+     * @return
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
     function responseError($message = null, $data = null)
