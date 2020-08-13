@@ -30,7 +30,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                " Rarangels\\ApiBasica\\ApiBasicaServiceProvider"
+                "Rarangels\\ApiBasica\\ApiBasicaServiceProvider"
             ]
         }
     }
