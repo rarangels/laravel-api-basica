@@ -28,10 +28,14 @@ class ApiBasicaServiceProvider extends ServiceProvider
     public function boot(Filesystem $filesystem)
     {
         if (function_exists('config_path')) {
-            $this->publicConfigurations();
+            //        $this->publicConfigurations();
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_applications_table.php.stub' => $this->getMigrationFileName($filesystem),
+            ], 'migrations');
         }
-
-        $this->publicMigrations($filesystem);
+        //    if (function_exists('config_path')) {
+        //    }
+        //    $this->publicMigrations($filesystem);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
