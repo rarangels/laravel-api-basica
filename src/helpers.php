@@ -2,6 +2,7 @@
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Facades\Schema;
 use Rarangels\ApiBasica\Models\Configuration;
 
 if (! function_exists('response')) {
@@ -115,7 +116,6 @@ if (! function_exists('responseWarning')) {
     }
 }
 
-
 if (! function_exists('api_configuracion')) {
     /**
      * @param $key
@@ -124,6 +124,10 @@ if (! function_exists('api_configuracion')) {
      */
     function api_configuracion($key)
     {
+        if (! Schema::hasTable('configurations')) {
+            return null;
+        }
+
         return Configuration::findByKey($key);
     }
 }

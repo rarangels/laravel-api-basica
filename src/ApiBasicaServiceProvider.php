@@ -22,6 +22,14 @@ use Illuminate\Support\ServiceProvider;
 class ApiBasicaServiceProvider extends ServiceProvider
 {
     /**
+     * @var string[]
+     */
+    private $migrations = [
+        'create_applications_table.php',
+        'create_configurations_table.php',
+    ];
+
+    /**
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
@@ -51,11 +59,7 @@ class ApiBasicaServiceProvider extends ServiceProvider
      */
     private function publicMigrations(Filesystem $filesystem)
     {
-        $migrations = [
-            'create_applications_table.php',
-            'create_configurations_table.php',
-        ];
-        foreach ($migrations as $migration) {
+        foreach ($this->migrations as $migration) {
             $this->publishes([
                 __DIR__.'/../database/migrations/'.$migration.'.stub' => $this->getMigrationFileName($filesystem, $migration),
             ], 'migrations');
@@ -84,6 +88,12 @@ class ApiBasicaServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/api-basica.php', 'api-basica');
     }
 
+    /**
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @param $migration
+     * @return string
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
     protected function getMigrationFileName(Filesystem $filesystem, $migration): string
     {
         $timestamp = date('Y_m_d_His');
