@@ -120,12 +120,14 @@ if (! function_exists('api_configuracion')) {
     /**
      * @param $key
      * @return mixed
+     * @throws \Exception
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
     function api_configuracion($key)
     {
         if (! Schema::hasTable('configurations')) {
-            return null;
+            throw new \Exception('Error: configurations table not exists. Run [php artisan vendor:publish --provider="Rarangels\ApiBasica\ApiBasicaServiceProvider" && php artisan migrate] and try again.');
+
         }
 
         return Configuration::findByKey($key);
