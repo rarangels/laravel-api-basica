@@ -35,6 +35,10 @@ class ApiBasicaServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../database/migrations/create_applications_table.php.stub' => $this->getMigrationFileName($filesystem),
             ], 'migrations');
+
+            $this->publishes([
+                __DIR__.'/../database/migrations/create_configurations_table.php.stub' => $this->getMigrationFileName($filesystem),
+            ], 'migrations');
         }
 
         if ($this->app->runningInConsole()) {

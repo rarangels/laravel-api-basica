@@ -20,3 +20,5 @@ php artisan vendor:publish --provider="Rarangels\ApiBasica\ApiBasicaServiceProvi
 ```
 
 2020_08_07_205330_create_applications_table.php
+
+php artisan queue:table

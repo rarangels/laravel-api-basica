@@ -2,6 +2,7 @@
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Rarangels\ApiBasica\Models\Configuration;
 
 if (! function_exists('response')) {
     /**
@@ -111,5 +112,18 @@ if (! function_exists('responseWarning')) {
             'message' => is_null($message) ? 'Mensaje de advertencia.' : $message,
             'data' => $data,
         ], 200);
+    }
+}
+
+
+if (! function_exists('api_configuracion')) {
+    /**
+     * @param $key
+     * @return mixed
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function api_configuracion($key)
+    {
+        return Configuration::findByKey($key);
     }
 }
