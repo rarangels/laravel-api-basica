@@ -21,7 +21,7 @@ class CreateConfigurationsTable extends Migration
             $table->timestamps();
         });
 
-        \App\Models\General\Configuration::create([
+        Rarangels\ApiBasica\Models\Configuration::create([
             'key' => 'SEND_MAIL',
             'description' => 'Variable booleana que controla si la api puede enviar correos electrónicos o no.',
             'value' => true,
