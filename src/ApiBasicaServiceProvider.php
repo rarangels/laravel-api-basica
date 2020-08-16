@@ -28,20 +28,11 @@ class ApiBasicaServiceProvider extends ServiceProvider
     public function boot(Filesystem $filesystem)
     {
         if (function_exists('config_path')) {
-            //        $this->publicConfigurations();
-            $this->publishes([
-                __DIR__.'/../database/migrations/create_applications_table.php.stub' => $this->getMigrationFileName($filesystem),
-            ], 'migrations');
+            $this->publicConfigurations();
         }
-        //    if (function_exists('config_path')) {
-        //    }
-        //    $this->publicMigrations($filesystem);
+        $this->publicMigrations($filesystem);
 
-        if ($this->app->runningInConsole()) {
-            $this->commands([
-                Commands\Notifications\WorkerStart::class,
-            ]);
-        }
+        $this->publicCommands();
     }
 
     /**
@@ -68,6 +59,18 @@ class ApiBasicaServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../database/migrations/'.$migration.'.stub' => $this->getMigrationFileName($filesystem, $migration),
             ], 'migrations');
+        }
+    }
+
+    /**
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    private function publicCommands()
+    {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                Commands\Notifications\WorkerStart::class,
+            ]);
         }
     }
 
