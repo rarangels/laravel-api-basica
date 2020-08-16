@@ -22,15 +22,16 @@ use Illuminate\Support\ServiceProvider;
 class ApiBasicaServiceProvider extends ServiceProvider
 {
     /**
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
-    public function boot()
+    public function boot(Filesystem $filesystem)
     {
         if (function_exists('config_path')) {
             $this->publicConfigurations();
         }
 
-        $this->publicMigrations();
+        $this->publicMigrations($filesystem);
 
         if ($this->app->runningInConsole()) {
             $this->commands([
@@ -49,6 +50,10 @@ class ApiBasicaServiceProvider extends ServiceProvider
         ], 'config');
     }
 
+    /**
+     * @param \Illuminate\Filesystem\Filesystem $filesystem
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
     private function publicMigrations(Filesystem $filesystem)
     {
         $migrations = [
