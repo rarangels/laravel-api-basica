@@ -50,7 +50,7 @@ class StartConfig extends Command
                 include_once($file);
             }
             if (! class_exists('CreateJobsTable')) {
-                $this-$this->info(Artisan::call('queue:table'));
+                Artisan::call('queue:table');
                 $this->info('Se ha publicado la migración CreateJobsTable.');
             }
         } else {
