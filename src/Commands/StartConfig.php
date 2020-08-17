@@ -55,6 +55,12 @@ class StartConfig extends Command
                     $this->info('Se ha publicado la migración CreateJobsTable.');
                 }
             }
+            if (! class_exists('CreateNotificationsTable')) {
+                $exit_code = Artisan::call('notifications:table');
+                if ($exit_code == 0){
+                    $this->info('Se ha publicado la migración CreateNotificationsTable.');
+                }
+            }
         } else {
             $this->info('Warning: Todas las migraciones necesarias no se han efectuado.');
         }
