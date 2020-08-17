@@ -62,7 +62,21 @@ class StartConfig extends Command
             '--provider' => "Rarangels\ApiBasica\ApiBasicaServiceProvider"
         ]);
         if ($exit_code == 0){
-            $this->info('Se han los archivos necesarios en: Config y Migrations. Por favor ejecuta [php artisan migrate] para terminar la instalación de las tablas.');
+            $this->info('Se han publicado los archivos necesarios en: Config y Migrations. Por favor ejecuta [php artisan migrate] para terminar la instalación de las tablas.');
+        }
+
+        $exit_code = Artisan::call('vendor:publish', [
+            '--tag' => "laravel-mail"
+        ]);
+        if ($exit_code == 0){
+            $this->info('Se han publicado los archivos necesarios para personalizar el HMTL de los correos electrónicos en [resources/views/vendor/mail]');
+        }
+
+        $exit_code = Artisan::call('vendor:publish', [
+            '--tag' => "laravel-notifications"
+        ]);
+        if ($exit_code == 0){
+            $this->info('Se han publicado los archivos necesarios para personalizar las notificaciones en [resources/views/vendor/notifications]');
         }
     }
 }
