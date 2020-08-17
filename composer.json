@@ -21,7 +21,9 @@
         "illuminate/contracts": "^7.25",
         "illuminate/validation": "^7.25",
         "illuminate/database": "^7.25",
-        "symfony/http-kernel": "^5.1"
+        "symfony/http-kernel": "^5.1",
+        "illuminate/console": "^7.25",
+        "nesbot/carbon": "^2.38"
     },
     "autoload": {
         "psr-4": {

@@ -74,6 +74,7 @@ class ApiBasicaServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 Commands\Notifications\WorkerStart::class,
+                Commands\StartConfig::class,
             ]);
         }
     }
