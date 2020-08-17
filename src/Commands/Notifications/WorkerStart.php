@@ -18,7 +18,7 @@ class WorkerStart extends Command
      *
      * @var string
      */
-    protected $signature = 'rarangels-worker-notifications:start';
+    protected $signature = 'rarangels:worker-notifications';
 
     /**
      * The console command description.

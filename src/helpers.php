@@ -126,7 +126,7 @@ if (! function_exists('api_configuracion')) {
     function api_configuracion($key)
     {
         if (! Schema::hasTable('configurations')) {
-            throw new \Exception('Error: configurations table not exists. Run [php artisan vendor:publish --provider="Rarangels\ApiBasica\ApiBasicaServiceProvider" && php artisan migrate] and try again.');
+            throw new \Exception('Error: configurations table not exists. Run [php artisan vendor:rarangels:start-config] and try again.');
 
         }
 

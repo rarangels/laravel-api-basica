@@ -19,7 +19,7 @@ class StartConfig extends Command
      *
      * @var string
      */
-    protected $signature = 'rarangels-config:start';
+    protected $signature = 'rarangels:start-config';
 
     /**
      * The console command description.
@@ -50,11 +50,13 @@ class StartConfig extends Command
                 include_once($file);
             }
             if (! class_exists('CreateJobsTable')) {
-                Artisan::call('queue:table');
+                $this-$this->info(Artisan::call('queue:table'));
+                $this->info('Se ha publicado la migración CreateJobsTable.');
             }
         } else {
             $this->info('Warning: Todas las migraciones necesarias no se han efectuado.');
         }
         Artisan::call('vendor:publish --provider="Rarangels\ApiBasica\ApiBasicaServiceProvider"');
+        $this->info('Se han los archivos necesarios en: Config y Migrations. Por favor ejecuta [php artisan migrate] para terminar la instalación de las tablas.');
     }
 }

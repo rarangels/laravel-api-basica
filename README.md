@@ -16,9 +16,11 @@ La migración **create_applications_table** y el archivo de configuración **con
 Para publicar las migraciones y el archivo de configuracion, debes ejecutar el siguiente comando:
 
 ```
-php artisan vendor:publish --provider="Rarangels\ApiBasica\ApiBasicaServiceProvider"
+php artisan rarangels:start-config
 ```
 
-2020_08_07_205330_create_applications_table.php
+Iniciar el worker
 
-php artisan queue:table
+```
+php artisan  rarangels:worker-notifications
+```
