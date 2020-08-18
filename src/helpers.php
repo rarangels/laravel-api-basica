@@ -126,10 +126,13 @@ if (! function_exists('api_configuracion')) {
     function api_configuracion($key)
     {
         if (! Schema::hasTable('configurations')) {
-            throw new \Exception('Error: configurations table not exists. Run [php artisan vendor:rarangels:start-config] and try again.');
-
+            throw new \Exception('Error: configurations table not exists. Run [php artisan rarangels:start-config && php artisan migrate] and try again.');
+        }
+        $configuracion = Configuration::findByKey($key);
+        if (is_null($configuracion)) {
+            return null;
         }
 
-        return Configuration::findByKey($key);
+        return $configuracion->value;
     }
 }
