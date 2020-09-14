@@ -26,6 +26,7 @@ class ApiBasicaServiceProvider extends ServiceProvider
      */
     private $migrations = [
         'create_applications_table.php',
+        'create_applications_tokens_table.php',
         'create_configurations_table.php',
     ];
 

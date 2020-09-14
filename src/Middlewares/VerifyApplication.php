@@ -2,8 +2,8 @@
 
 namespace Rarangels\ApiBasica\Middleware;
 
-use Rarangels\ApiBasica\Models\Application;
 use Closure;
+use Rarangels\ApiBasica\Models\Tokens;
 
 class VerifyApplication
 {
@@ -18,18 +18,28 @@ class VerifyApplication
     public function handle($request, Closure $next)
     {
         if ($request->ajax()) {
-            $token = $request->header('api-token');
-            if (! $token) {
-                return response()->json(['message' => 'Falta el api-token en la petición.'], 400);
+            $api_token = $request->header('api-token');
+            $key = $request->header('api-key');
+
+            if (! $api_token) {
+                return responseError('Falta el api-token en la petición.');
+            }
+            if (! $key) {
+                return responseError('Falta la Key en la petición.');
             }
             if ($request->header('Accept') != 'application/json') {
-                return response()->json(['message' => 'El tipo de datos no es aceptado.'], 400);
+                return responseError('El tipo de datos no es aceptado.');
             }
             if ($request->header('X-Requested-With') != 'XMLHttpRequest') {
-                return response()->json(['message' => 'Falta la cabecera X-Requested-With.'], 400);
+                return responseError('Falta la cabecera X-Requested-With.');
             }
-            if (! Application::findByToken($token)) {
-                return response()->json(['message' => 'La api key proporcionada no es permitida, por favor contactar a '.env('MAIL_CONTACT').' o verifique que la api key esté correcta.'], 401);
+
+            $token = Tokens::findByTokensEnabled($api_token, $key);
+            if ($token && $token->application->domain_url != '*' && $request->header('host') != $token->application->domain_url) {
+                return responseError('El host no tiene permisos para realizar esta petición.');
+                //dd(parse_url($request->header('host')), $request->header('host'), $request->getClientIp(), $request->header('origin'));
+            } else {
+                return responseError('La api key o el token proporcionado no es permitido.', null, 401);
             }
         } else {
             if (! config('api-basica.general.allow_view_responses_in_browser', false)) {

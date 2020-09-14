@@ -6,10 +6,21 @@ use Rarangels\ApiBasica\Traits\findByKey;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Application
+ *
+ * @package Rarangels\ApiBasica\Models
+ * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+ */
 class Application extends Model
 {
     use findByKey;
 
+    /**
+     * Application constructor.
+     *
+     * @param array $attributes
+     */
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
@@ -23,13 +34,14 @@ class Application extends Model
     protected $fillable = [
         'name',
         'domain_url',
-        'key',
-        'api_token',
-        'api_token_expred_at',
     ];
 
-    public static function findByToken($token)
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    public function tokens()
     {
-        return self::where('api_token', $token)->first();
+        return $this->hasMany('Rarangels\ApiBasica\Models\Tokens', 'application_id', 'id');
     }
 }

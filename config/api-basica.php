@@ -7,6 +7,7 @@ return [
 
     'table_names' => [
         'applications' => 'applications',
+        'applications_tokens' => 'applications_tokens',
     ],
 
 
@@ -16,7 +17,7 @@ return [
          * los datos en el navegador.
          * Para peticiones desde otras aplicaciones se sigue conservando la restricción
          * sin importar el valor que tenga esta variable.
-        **/
+         **/
 
         'allow_view_responses_in_browser' => false
     ]
