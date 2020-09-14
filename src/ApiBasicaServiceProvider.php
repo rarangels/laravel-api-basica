@@ -71,7 +71,7 @@ class ApiBasicaServiceProvider extends ServiceProvider
         foreach ($this->seeders as $seeder) {
             $this->publishes([
                 __DIR__.'/../database/seeds/'.$seeder => $seeder,
-            ], 'migrations');
+            ], 'seeds');
         }
     }
 
