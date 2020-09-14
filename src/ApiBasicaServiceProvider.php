@@ -30,6 +30,14 @@ class ApiBasicaServiceProvider extends ServiceProvider
     ];
 
     /**
+     * @var string[]
+     */
+    private $seeders = [
+        'ApplicationsSeeder.php',
+    ];
+
+
+    /**
      * @param \Illuminate\Filesystem\Filesystem $filesystem
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
@@ -39,6 +47,8 @@ class ApiBasicaServiceProvider extends ServiceProvider
             $this->publicConfigurations();
         }
         $this->publicMigrations($filesystem);
+
+        $this->publicSeeders();
 
         $this->publicCommands();
     }
@@ -51,6 +61,18 @@ class ApiBasicaServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/api-basica.php' => config_path('api-basica.php'),
         ], 'config');
+    }
+
+    /**
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    private function publicSeeders()
+    {
+        foreach ($this->seeders as $seeder) {
+            $this->publishes([
+                __DIR__.'/../database/seeds/'.$seeder => $seeder,
+            ], 'migrations');
+        }
     }
 
     /**
