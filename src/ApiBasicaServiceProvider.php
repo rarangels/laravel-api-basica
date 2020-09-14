@@ -70,7 +70,7 @@ class ApiBasicaServiceProvider extends ServiceProvider
     {
         foreach ($this->seeders as $seeder) {
             $this->publishes([
-                __DIR__.'/../database/seeds/'.$seeder => $seeder,
+                __DIR__.'/../database/seeds/'.$seeder => $this->getSeederFileName($seeder),
             ], 'seeds');
         }
     }
@@ -126,5 +126,15 @@ class ApiBasicaServiceProvider extends ServiceProvider
         ) use ($filesystem, $migration) {
             return $filesystem->glob($path.'*_'.$migration);
         })->push($this->app->databasePath()."/migrations/{$timestamp}_{$migration}")->first();
+    }
+
+    /**
+     * @param $seeder
+     * @return string
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    protected function getSeederFileName($seeder): string
+    {
+        return $this->app->databasePath().DIRECTORY_SEPARATOR.'seeds'.DIRECTORY_SEPARATOR.$seeder;
     }
 }
