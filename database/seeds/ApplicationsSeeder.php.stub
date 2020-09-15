@@ -20,9 +20,12 @@ class ApplicationsSeeder extends Seeder
             'domain_url' => 'localhost',
         ]);
 
-        $application->token()->save([
+        $token = new \Rarangels\ApiBasica\Models\Tokens([
             'key' => 'LjUvofc7fdrTxaojlV5WZKFbA5HXzmGQNmxohKECvr25Zqp91VSRARANGELS',
-            'api_token' => 'LjUvofc7fdrTxaojlV5WZKFbRARANGELSA5HXzmGQNmxohKECvr25Zqp91VS',
+            'token' => 'LjUvofc7fdrTxaojlV5WZKFbRARANGELSA5HXzmGQNmxohKECvr25Zqp91VS',
+            'expred_at' => \Carbon\Carbon::now()->addYear()
         ]);
+
+        $application->tokens()->save($token);
     }
 }
