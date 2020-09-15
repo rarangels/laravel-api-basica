@@ -3,6 +3,7 @@
 namespace Rarangels\ApiBasica\Middleware;
 
 use Closure;
+use Illuminate\Database\QueryException;
 use Rarangels\ApiBasica\Models\Tokens;
 
 class VerifyApplication
@@ -33,7 +34,12 @@ class VerifyApplication
                 return responseError('Falta la cabecera X-Requested-With.');
             }
 
-            $tokens = Tokens::findByTokensEnabled($api_token, $key);
+            try {
+                $tokens = Tokens::findByTokensEnabled($api_token, $key);
+            } catch (QueryException $exception) {
+                return responseError('Existe un error en la base de datos. Por favor intenta mas tarde o contacta al soporte');
+            }
+
             if ($tokens && $tokens->where('application.domain_url', '*')->count() == 0 && $tokens->where('application.domain_url', $request->header('host'))->count() == 0) {
                 return responseError('El host no tiene permisos para realizar esta petición ó la key y el token no son válidos.', null, 401);
                 //dd(parse_url($request->header('host')), $request->header('host'), $request->getClientIp(), $request->header('origin'));
