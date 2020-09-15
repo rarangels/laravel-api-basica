@@ -36,7 +36,7 @@ class Tokens extends Model
         'application_id',
         'key',
         'token',
-        'expred_at',
+        'expired_at',
     ];
 
     /**
@@ -46,7 +46,7 @@ class Tokens extends Model
      */
     public function scopeEnabled($query)
     {
-        return $query->where('expred_at', '>', Carbon::now());
+        return $query->where('expired_at', '>', Carbon::now());
     }
 
     /**
@@ -56,7 +56,7 @@ class Tokens extends Model
      */
     public function scopeExpired($query)
     {
-        return $query->where('expred_at', '<=', Carbon::now());
+        return $query->where('expired_at', '<=', Carbon::now());
     }
 
     /**

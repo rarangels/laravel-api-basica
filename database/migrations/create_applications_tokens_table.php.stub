@@ -24,7 +24,7 @@ class CreateApplicationsTokensTable extends Migration
             $table->foreignId('application_id');
             $table->string('key', 80);
             $table->string('token', 80)->unique()->nullable()->default(null);
-            $table->timestamp('expred_at')->nullable();
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
 
             $table->foreign('application_id')->references('id')->on($tableNames['applications']);
