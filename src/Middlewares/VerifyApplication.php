@@ -20,7 +20,6 @@ class VerifyApplication
         if ($request->ajax()) {
             $api_token = $request->header('api-token');
             $key = $request->header('api-key');
-
             if (! $api_token) {
                 return responseError('Falta el api-token en la petición.');
             }
@@ -34,12 +33,10 @@ class VerifyApplication
                 return responseError('Falta la cabecera X-Requested-With.');
             }
 
-            $token = Tokens::findByTokensEnabled($api_token, $key);
-            if ($token && $token->application->domain_url != '*' && $request->header('host') != $token->application->domain_url) {
-                return responseError('El host no tiene permisos para realizar esta petición.');
+            $tokens = Tokens::findByTokensEnabled($api_token, $key);
+            if ($tokens && $tokens->where('application.domain_url', '*')->count() == 0 && $tokens->where('application.domain_url', $request->header('host'))->count() == 0) {
+                return responseError('El host no tiene permisos para realizar esta petición ó la key y el token no son válidos.', null, 401);
                 //dd(parse_url($request->header('host')), $request->header('host'), $request->getClientIp(), $request->header('origin'));
-            } else {
-                return responseError('La api key o el token proporcionado no es permitido.', null, 401);
             }
         } else {
             if (! config('api-basica.general.allow_view_responses_in_browser', false)) {

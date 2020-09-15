@@ -89,7 +89,7 @@ class Tokens extends Model
      */
     public static function findByTokens($token, $key)
     {
-        return self::whereTokens($token, $key)->first();
+        return self::whereTokens($token, $key)->get();
     }
 
     /**
@@ -100,7 +100,7 @@ class Tokens extends Model
      */
     public static function findByTokensEnabled($token, $key)
     {
-        return self::whereTokens($token, $key)->enabled()->first();
+        return self::whereTokens($token, $key)->enabled()->get();
     }
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -23,7 +23,7 @@ class ApplicationsSeeder extends Seeder
         $token = new \Rarangels\ApiBasica\Models\Tokens([
             'key' => 'LjUvofc7fdrTxaojlV5WZKFbA5HXzmGQNmxohKECvr25Zqp91VSRARANGELS',
             'token' => 'LjUvofc7fdrTxaojlV5WZKFbRARANGELSA5HXzmGQNmxohKECvr25Zqp91VS',
-            'expred_at' => \Carbon\Carbon::now()->addYear()
+            'expired_at' => \Carbon\Carbon::now()->addYear()
         ]);
 
         $application->tokens()->save($token);
