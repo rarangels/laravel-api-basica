@@ -19,6 +19,12 @@ return [
          * sin importar el valor que tenga esta variable.
          **/
 
-        'allow_view_responses_in_browser' => false
+        'allow_view_responses_in_browser' => false,
+
+        // Habilitar/Deshabilitar el uso de la key adicional. Por defecto solo se usa el API-TOKEN
+        'enable_second_factor_auth' => false,
+
+        // Habilitar/Deshabilitar el uso de tiempo límite para los token
+        'enable_time_expired' => false,
     ]
 ];

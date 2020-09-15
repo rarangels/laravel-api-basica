@@ -67,7 +67,11 @@ class Tokens extends Model
      */
     public function ScopeWhereTokens($query, $token, $key)
     {
-        return $query->where('token', $token)->where('key', $key);
+        if (config('api-basica.general.enable_second_factor_auth')) {
+            $query->where('key', $key);
+        }
+
+        return $query->where('token', $token);
     }
 
     /**
@@ -78,6 +82,10 @@ class Tokens extends Model
      */
     public static function checkTokens($token, $key)
     {
+        if (! config('api-basica.general.enable_time_expired')) {
+            return self::whereTokens($token, $key)->exists();
+        }
+
         return self::whereTokens($token, $key)->enabled()->exists();
     }
 
@@ -100,8 +108,23 @@ class Tokens extends Model
      */
     public static function findByTokensEnabled($token, $key)
     {
+        if (! config('api-basica.general.enable_time_expired')) {
+            return self::whereTokens($token, $key)->get();
+        }
         return self::whereTokens($token, $key)->enabled()->get();
     }
+
+    /**
+     * @param $token
+     * @param $key
+     * @return mixed
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    public static function findByTokensExpired($token, $key)
+    {
+        return self::whereTokens($token, $key)->expired()->get();
+    }
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>

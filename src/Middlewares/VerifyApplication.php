@@ -3,7 +3,6 @@
 namespace Rarangels\ApiBasica\Middleware;
 
 use Closure;
-use Illuminate\Database\QueryException;
 use Rarangels\ApiBasica\Models\Tokens;
 
 class VerifyApplication
@@ -24,7 +23,7 @@ class VerifyApplication
             if (! $api_token) {
                 return responseError('Falta el api-token en la petición.');
             }
-            if (! $key) {
+            if (! $key && config('api-basica.general.enable_second_factor_auth')) {
                 return responseError('Falta la Key en la petición.');
             }
             if ($request->header('Accept') != 'application/json') {
@@ -34,14 +33,9 @@ class VerifyApplication
                 return responseError('Falta la cabecera X-Requested-With.');
             }
 
-            try {
-                $tokens = Tokens::findByTokensEnabled($api_token, $key);
-            } catch (QueryException $exception) {
-                return responseError('Existe un error en la base de datos. Por favor intenta mas tarde o contacta al soporte');
-            }
-
+            $tokens = Tokens::findByTokensEnabled($api_token, $key);
             if ($tokens && $tokens->where('application.domain_url', '*')->count() == 0 && $tokens->where('application.domain_url', $request->header('host'))->count() == 0) {
-                return responseError('El host no tiene permisos para realizar esta petición ó la key y el token no son válidos.', null, 401);
+                return responseError('El host no tiene permisos para realizar esta petición, la api-key y el api-token no son válidos ó el tiempo de validez de la key expiró.', null, 401);
                 //dd(parse_url($request->header('host')), $request->header('host'), $request->getClientIp(), $request->header('origin'));
             }
         } else {
