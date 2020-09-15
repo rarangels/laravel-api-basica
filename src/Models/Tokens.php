@@ -65,9 +65,9 @@ class Tokens extends Model
      * @return mixed
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
-    public function ScopeWhereTokens($token, $key)
+    public function ScopeWhereTokens($query, $token, $key)
     {
-        return self::where('token', $token)->where('key', $key);
+        return $query->where('token', $token)->where('key', $key);
     }
 
     /**
