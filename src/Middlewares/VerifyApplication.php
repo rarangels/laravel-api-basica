@@ -38,6 +38,9 @@ class VerifyApplication
                 return responseError('El host no tiene permisos para realizar esta petición, la api-key y el api-token no son válidos ó el tiempo de validez de la key expiró.', null, 401);
                 //dd(parse_url($request->header('host')), $request->header('host'), $request->getClientIp(), $request->header('origin'));
             }
+            $request->merge([
+                'application' => $tokens->first()->application,
+            ]);
         } else {
             if (! config('api-basica.general.allow_view_responses_in_browser', false)) {
                 return redirect('')->with('error', 'No estas autorizado en realizar esta petición');
