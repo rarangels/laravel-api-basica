@@ -34,6 +34,7 @@ class Application extends Model
     protected $fillable = [
         'name',
         'domain_url',
+        'webhook_url',
         'css'
     ];
 
