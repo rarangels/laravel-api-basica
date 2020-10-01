@@ -23,7 +23,8 @@ class CreateApplicationsTable extends Migration
             $table->id();
             $table->string('name');
             $table->text('domain_url');
-            $table->text('webhook_url');
+            $table->text('webhook_url')->nullable();
+            $table->text('logo_url')->nullable();
 			$table->longText('css')->nullable();
             $table->timestamps();
         });

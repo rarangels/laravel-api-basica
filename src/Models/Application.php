@@ -35,6 +35,7 @@ class Application extends Model
         'name',
         'domain_url',
         'webhook_url',
+        'logo_url',
         'css'
     ];
 
