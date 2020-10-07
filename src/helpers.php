@@ -3,6 +3,7 @@
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Session;
 use Rarangels\ApiBasica\Models\Configuration;
 
 if (! function_exists('response')) {
@@ -157,17 +158,65 @@ if (! function_exists('api_configuracion')) {
     }
 }
 
-if (! function_exists('isJson')) {
+//if (! function_exists('isJson')) {
+//    /**
+//     * @param $key
+//     * @return mixed
+//     * @throws \Exception
+//     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+//     */
+//    function isJson($string)
+//    {
+//        json_decode($string);
+//
+//        return (json_last_error() == JSON_ERROR_NONE);
+//    }
+//}
+
+if (! function_exists('messagePrimary')) {
     /**
-     * @param $key
      * @return mixed
      * @throws \Exception
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
-    function isJson($string)
+    function messagePrimary($message)
     {
-        json_decode($string);
+        Session::flash('primary', $message);
+    }
+}
 
-        return (json_last_error() == JSON_ERROR_NONE);
+if (! function_exists('messageInfo')) {
+    /**
+     * @return mixed
+     * @throws \Exception
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function messageInfo($message)
+    {
+        Session::flash('info', $message);
+    }
+}
+
+if (! function_exists('messageWarning')) {
+    /**
+     * @return mixed
+     * @throws \Exception
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function messageWarning($message)
+    {
+        Session::flash('warning', $message);
+    }
+}
+
+if (! function_exists('messageDanger')) {
+    /**
+     * @return mixed
+     * @throws \Exception
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function messageDanger($message)
+    {
+        Session::flash('danger', $message);
     }
 }
