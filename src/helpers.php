@@ -156,3 +156,18 @@ if (! function_exists('api_configuracion')) {
         return $configuracion->value;
     }
 }
+
+if (! function_exists('isJson')) {
+    /**
+     * @param $key
+     * @return mixed
+     * @throws \Exception
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function isJson($string)
+    {
+        json_decode($string);
+
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+}
