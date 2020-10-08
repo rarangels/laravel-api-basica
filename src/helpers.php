@@ -2,6 +2,7 @@
 
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Session;
 use Rarangels\ApiBasica\Models\Configuration;
@@ -218,5 +219,20 @@ if (! function_exists('messageDanger')) {
     function messageDanger($message)
     {
         Session::flash('danger', $message);
+    }
+}
+
+if (! function_exists('setOldsInput')) {
+    /**
+     * @param $arrayOrCollection
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function setOldsInput($arrayOrCollection)
+    {
+        if ($arrayOrCollection instanceof Collection) {
+            $arrayOrCollection = $arrayOrCollection->toArray();
+        }
+
+        Session::flash('_old_input', $arrayOrCollection);
     }
 }
