@@ -222,12 +222,12 @@ if (! function_exists('messageDanger')) {
     }
 }
 
-if (! function_exists('setOldsInput')) {
+if (! function_exists('withOldsInput')) {
     /**
      * @param $arrayOrCollection
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
      */
-    function setOldsInput($arrayOrCollection)
+    function withOldsInput($arrayOrCollection)
     {
         if ($arrayOrCollection instanceof Collection) {
             $arrayOrCollection = $arrayOrCollection->toArray();
