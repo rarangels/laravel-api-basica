@@ -40,6 +40,16 @@ class Tokens extends Model
     ];
 
     /**
+     * @param $expired_at
+     * @return \Carbon\Carbon
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    public function getExpiredAtAttribute($expired_at)
+    {
+        return Carbon::parse($expired_at);
+    }
+
+    /**
      * @param $query
      * @return mixed
      * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
@@ -111,6 +121,7 @@ class Tokens extends Model
         if (! config('api-basica.general.enable_time_expired')) {
             return self::whereTokens($token, $key)->get();
         }
+
         return self::whereTokens($token, $key)->enabled()->get();
     }
 
