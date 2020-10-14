@@ -236,3 +236,27 @@ if (! function_exists('withOldsInput')) {
         Session::flash('_old_input', $arrayOrCollection);
     }
 }
+
+if (! function_exists('money')) {
+    /**
+     * @param $number
+     * @return string
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function money($number)
+    {
+        return '$'.number_format($number, 2);
+    }
+}
+
+if (! function_exists('percentage')) {
+    /**
+     * @param $number
+     * @return string
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
+    function percentage($number)
+    {
+        return number_format($number, 2). '%';
+    }
+}
