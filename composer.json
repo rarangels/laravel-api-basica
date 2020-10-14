@@ -26,7 +26,8 @@
         "nesbot/carbon": "^2.38",
         "illuminate/notifications": "^7.25",
         "illuminate/cookie": "^7.28",
-        "illuminate/http": "^7.28"
+        "illuminate/http": "^7.28",
+        "illuminate/view": "^7.28"
     },
     "autoload": {
         "psr-4": {

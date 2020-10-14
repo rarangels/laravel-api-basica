@@ -12,6 +12,7 @@ namespace Rarangels\ApiBasica;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Collection;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\Compilers\BladeCompiler;
 
 /**
  * Class RarangelsApiBasicaServiceProvider
@@ -110,6 +111,8 @@ class ApiBasicaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/../config/api-basica.php', 'api-basica');
+
+        $this->registerBladeExtensions();
     }
 
     /**
@@ -137,5 +140,17 @@ class ApiBasicaServiceProvider extends ServiceProvider
     protected function getSeederFileName($seeder): string
     {
         return $this->app->databasePath().DIRECTORY_SEPARATOR.'seeds'.DIRECTORY_SEPARATOR.$seeder;
+    }
+
+    protected function registerBladeExtensions()
+    {
+        $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
+            $bladeCompiler->directive('money', function ($amount) {
+                return "<?php echo money($amount); ?>";
+            });
+            $bladeCompiler->directive('percentage', function ($amount) {
+                return "<?php echo percentage($amount); ?>";
+            });
+        });
     }
 }
