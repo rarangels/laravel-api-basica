@@ -142,6 +142,9 @@ class ApiBasicaServiceProvider extends ServiceProvider
         return $this->app->databasePath().DIRECTORY_SEPARATOR.'seeds'.DIRECTORY_SEPARATOR.$seeder;
     }
 
+    /**
+     * @author Rafael Agustin Rangel Sandoval <rarangels93@gmail.com>
+     */
     protected function registerBladeExtensions()
     {
         $this->app->afterResolving('blade.compiler', function (BladeCompiler $bladeCompiler) {
