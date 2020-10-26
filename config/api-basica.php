@@ -26,5 +26,8 @@ return [
 
         // Habilitar/Deshabilitar el uso de tiempo límite para los token
         'enable_time_expired' => false,
+
+        // Habilitar/Deshabilitar el uso de notificaciones por correo electrónico
+        'send_mail_notification' => false,
     ]
 ];
