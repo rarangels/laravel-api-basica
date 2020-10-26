@@ -27,8 +27,7 @@
         "illuminate/notifications": "^7.25",
         "illuminate/cookie": "^7.28",
         "illuminate/http": "^7.28",
-        "illuminate/view": "^7.28",
-        "illuminate/foundation": "^1.1"
+        "illuminate/view": "^7.28"
     },
     "autoload": {
         "psr-4": {
