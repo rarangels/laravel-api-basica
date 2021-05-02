@@ -48,4 +48,13 @@ class Configuration extends Model
             }
         }
     }
+    public function getValueAttribute(){
+        if (!is_null(json_decode($this->attributes['value']))){
+            return json_decode($this->attributes['value']);
+        }
+        if ($this->attributes['value'] == "TRUE" || $this->attributes['value'] == "FALSE"){
+            return filter_var($this->attributes['value'], FILTER_VALIDATE_BOOLEAN);
+        }
+        return $this->attributes['value'];
+    }
 }
